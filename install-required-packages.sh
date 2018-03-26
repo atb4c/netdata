@@ -1631,7 +1631,7 @@ Default Python v: ${pv} $([ ${pv} -eq 2 -a ${PACKAGES_NETDATA_PYTHON3} -eq 1 ] &
 EOF
 
 PACKAGES_TO_INSTALL=( $(packages | sort -u) )
-echo ${PACKAGES_TO_INSTALL}
+echo ${PACKAGES_TO_INSTALL[@]}
 
 if [ ${#PACKAGES_TO_INSTALL[@]} -gt 0 ]
 	then
