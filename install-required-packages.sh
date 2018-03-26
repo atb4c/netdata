@@ -954,8 +954,8 @@ declare -A pkg_zip=(
 	['default']="zip"
 	)
 
-declare -A pkg_intel_gpu_top=(
-	['default']="intel_gpu_top"
+declare -A pkg_intel_gpu_tools=(
+	['default']="intel-gpu-tools"
 	)
 
 validate_installed_package() {
