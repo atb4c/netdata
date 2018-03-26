@@ -34,6 +34,7 @@ dist_python_DATA = \
     hddtemp.chart.py \
     httpcheck.chart.py \
     icecast.chart.py \
+    intel_gpu.chart.py \
     ipfs.chart.py \
     isc_dhcpd.chart.py \
     mdstat.chart.py \

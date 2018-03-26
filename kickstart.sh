@@ -268,7 +268,7 @@ then
     if [ "${HAS_BASH4}" = "1" ]
     then
         tmp="$(mktemp /tmp/netdata-kickstart-XXXXXX)"
-        url="https://raw.githubusercontent.com/firehol/netdata-demo-site/master/install-required-packages.sh"
+        url="https://raw.githubusercontent.com/atb4c/netdata/master/install-required-packages.sh"
 
         progress "Downloading script to detect required packages..."
         if [ ! -z "${curl}" ]
@@ -327,7 +327,7 @@ then
     if [ ! -d "${SOURCE_DST}/netdata.git" ]
     then
         progress "Downloading netdata source code..."
-        run ${sudo} ${git} clone https://github.com/firehol/netdata.git "${SOURCE_DST}/netdata.git" || fatal "Cannot download netdata source"
+        run ${sudo} ${git} clone https://github.com/atb4c/netdata.git "${SOURCE_DST}/netdata.git" || fatal "Cannot download netdata source"
         cd "${SOURCE_DST}/netdata.git" || fatal "Cannot cd to netdata source tree"
     else
         progress "Updating netdata source code..."
@@ -372,3 +372,22 @@ then
 else
     fatal "Cannot install netdata from source, on this system (cannot download the source code)."
 fi
+
+# ---------------------------------------------------------------------------------------------------------------------
+# install and enable GPU monitoring service
+
+GPU_SERVICE_FILE = "/etc/systemd/system/gpu_monitoring.service"
+
+${sudo} cat <<EOF >$GPU_SERVICE_FILE
+[Unit]
+Description=GPU Monitoring service
+
+[Service]
+ExecStart=/bin/sh -c '/usr/bin/intel_gpu_top -o - -s 100 > /var/log/intel_gpu_top.log'
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+run ${sudo} systemctl start gpu_monitoring
+sudo systemctl enable gpu_monitoring

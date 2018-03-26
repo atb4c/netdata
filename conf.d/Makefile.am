@@ -46,6 +46,7 @@ dist_pythonconfig_DATA = \
     python.d/hddtemp.conf \
     python.d/httpcheck.conf \
     python.d/icecast.conf \
+    python.d/intel_gpu.conf \
     python.d/ipfs.conf \
     python.d/isc_dhcpd.conf \
     python.d/mdstat.conf \

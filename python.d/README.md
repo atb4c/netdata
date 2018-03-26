@@ -922,6 +922,38 @@ Without configuration, module attempts to connect to `http://localhost:8443/stat
 
 ---
 
+# Intel GPU
+
+Module monitors Intel GPU usage via intel_gpu_top.
+
+
+**Requirements:**
+
+An intel_gpu_top process run as root with output directed to file. It is advised to use minimal sample rate as it can cause high CPU load.
+
+Example:
+
+```bash
+sudo intel_gpu_top -s 100 -o - > /var/log/intel_gpu_top.log
+```
+
+1. **usage** in percent
+ * render
+ * bitstream
+ * blitter
+
+### configuration
+
+Sample:
+
+```yaml
+local:
+  name: 'local'
+  path: '/var/log/intel_gpu_top.log'
+```
+
+---
+
 # IPFS
 
 Module monitors [IPFS](https://ipfs.io) basic information.
