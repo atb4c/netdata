@@ -286,7 +286,6 @@ then
         if [ -s "${tmp}" ]
         then
             progress "Running downloaded script to detect required packages..."
-            echo ${tmp} ${PACKAGES_INSTALLER_OPTIONS}
             run ${sudo} "${bash}" "${tmp}" ${PACKAGES_INSTALLER_OPTIONS} || ask=1
             rm "${tmp}"
         else
