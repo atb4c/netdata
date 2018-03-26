@@ -384,7 +384,16 @@ GPU_SERVICE_STR="[Unit]\nDescription=GPU Monitoring service\n\n[Service]\nExecSt
 GPU_SERVICE_NAME="gpu_monitoring"
 
 cd ~/
-echo ${GPU_SERVICE_STR} >> ${GPU_SERVICE_FILE}
+cat > ${GPU_SERVICE_FILE} <<- EOM
+[Unit]
+Description=GPU Monitoring service
+
+[Service]
+ExecStart=/bin/sh -c '/usr/bin/intel_gpu_top -o - -s 100 > /var/log/intel_gpu_top.log'
+
+[Install]
+WantedBy=multi-user.target
+EOM
 
 run ${sudo} mv ${GPU_SERVICE_FILE} ${GPU_SERVICE_PATH}
 run ${sudo} systemctl start ${GPU_SERVICE_NAME}
