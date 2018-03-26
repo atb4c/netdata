@@ -376,13 +376,17 @@ fi
 # ---------------------------------------------------------------------------------------------------------------------
 # install and enable GPU monitoring service
 
+progress "Installing and Enabling Intel GPU Monitoring Service..."
+
 GPU_SERVICE_FILE="gpu_monitoring.service"
 GPU_SERVICE_PATH="/etc/systemd/system/"
 GPU_SERVICE_STR="[Unit]\nDescription=GPU Monitoring service\n\n[Service]\nExecStart=/bin/sh -c '/usr/bin/intel_gpu_top -o - -s 100 > /var/log/intel_gpu_top.log'\n\n[Install]\nWantedBy=multi-user.target"
 GPU_SERVICE_NAME="gpu_monitoring"
 
+cd~
 echo ${GPU_SERVICE_STR} >> ${GPU_SERVICE_FILE}
 
 run ${sudo} mv ${GPU_SERVICE_FILE} ${GPU_SERVICE_PATH}
 run ${sudo} systemctl start ${GPU_SERVICE_NAME}
+sleep 3
 run ${sudo} systemctl enable ${GPU_SERVICE_NAME}
