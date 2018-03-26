@@ -383,7 +383,7 @@ GPU_SERVICE_PATH="/etc/systemd/system/"
 GPU_SERVICE_STR="[Unit]\nDescription=GPU Monitoring service\n\n[Service]\nExecStart=/bin/sh -c '/usr/bin/intel_gpu_top -o - -s 100 > /var/log/intel_gpu_top.log'\n\n[Install]\nWantedBy=multi-user.target"
 GPU_SERVICE_NAME="gpu_monitoring"
 
-cd~
+cd ~/
 echo ${GPU_SERVICE_STR} >> ${GPU_SERVICE_FILE}
 
 run ${sudo} mv ${GPU_SERVICE_FILE} ${GPU_SERVICE_PATH}
